@@ -17,6 +17,7 @@
      </div><br/>
      <div class="wrapper">
          <div>Wins: <span id="wins">0</span>
+            <p id="winner"></p>
          </div><br/>
          <div id="word">
          </div>
@@ -56,12 +57,15 @@
     var underscore = [];
     var remainingGuess = 10;
     var winsTotal = 0;
+    var winnerText = "";
+    var usedLetter = [];
     
     var winsTotalText = document.getElementById("wins");
     var underscoreText = document.getElementById("word");
     var wrongLetterText = document.getElementById("wrong-letter");
     var guessesLeftText = document.getElementById("guesses");
     var resetButton = document.getElementById("reset");
+    var winnerText = document.getElementById("winner");
 
     console.log(show)
     
@@ -102,6 +106,9 @@
                 }
 
             }
+        } else if (wrongLetter.includes(userGuess)) {
+            usedLetter.push(userGuess);
+            console.log(usedLetter);
         } else {
             wrongLetter.push(userGuess);
             remainingGuess--;
@@ -117,22 +124,36 @@
                 console.log("Game Over")
  
         }
-   
-            // Moving all elements to the DOM
-                winsTotalText.textContent = winsTotal
-                underscoreText.textContent = underscore.join(' ');
-                wrongLetterText.textContent = wrongLetter;
+        
+        console.log("underscoreText=" + underscore.join(''))
+        if (underscore.join('') === show) {
+            winnerText.innerHTML = "You Won!";
+            winsTotal++;
+                console.log(winsTotal)
+                console.log("underscoreText=" + underscore.join(''))
+
+        }
+        // Moving all elements to the DOM
+        winsTotalText.textContent = winsTotal
+        underscoreText.textContent = underscore.join(' ');
+        wrongLetterText.textContent = wrongLetter;
+
     }
+
+
 
     resetButton.addEventListener("click", function(){
         show = ""
         show = tvShows[Math.floor(Math.random() * tvShows.length)];
         console.log(show)
-        remainingGuess = 10;
-        wrongLetter = [];
+        guessesLeftText.textContent = 10;
+        winnerText.innerHTML = ''
+        wrongLetter = []
         makeUnderscore();
         underscoreText.textContent = underscore.join(' ');
+        wrongLetterText.textContext = wrongLetter
     })
+
     underscoreText.textContent = underscore.join(' ');
 
     </script>
