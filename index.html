@@ -19,10 +19,11 @@
          <div>Wins: <span id="wins">0</span>
          </div><br/>
          <div id="word">
-         </div><br/>
-         <div id="wrong-letter">
          </div>
-         <p>Guesses remaining: <span id="guesses">10</span></p><br/> 
+         <hr>
+         <p>Incorrect Guesses: <span id="wrong-letter"></span></p>
+        <p>Guesses remaining: <span id="guesses">10</span></p>
+         <hr> 
            <button id="reset">Play again</button>
          </div>
      </div>
@@ -53,7 +54,7 @@
     var rightLetter = [];
     var wrongLetter = [];
     var underscore = [];
-    var guessesLeft = 10;
+    var remainingGuess = 10;
     var winsTotal = 0;
     
     var winsTotalText = document.getElementById("wins");
@@ -79,11 +80,7 @@
     document.onkeyup = function() {
         var userGuess = String.fromCharCode(event.keyCode).
         toLowerCase();
-    
-    // Tells the user how many guesses they have remaining out of 10 //
-        
-        guessesLeft--
-        console.log(guessesLeft);
+      
     
     // Determines if userGuess is found in word, pushes to rightLetter or wrongLetter array //   
     
@@ -91,38 +88,44 @@
             for (var w = 0; w < show.length; w++) {
                 if (show[w] === userGuess) {
     
-    // Replaces first underscores with correct user guesses //
-                    underscore[show.indexOf(userGuess)] = userGuess;
+    // Replaces underscores with correct user guesses //
+                    underscore[w] = userGuess;
                     rightLetter.push(userGuess);
                     console.log(show[w])
+
                 }
-                    console.log("In word")
-                    console.log(show.indexOf(userGuess))
+                    console.log("In word");
+                    console.log(show.indexOf(userGuess));
+                    console.log(rightLetter);
                     console.log(underscore);
+
                 }} else {
                     wrongLetter.push(userGuess);
-                        console.log("Not in word")
+                    remainingGuess--;
+                    console.log(wrongLetter);   
+                    console.log("Not in word");
         }
+                winsTotalText.textContent = winsTotal
+                underscoreText.textContent = underscore.join(' ');
+                guessesLeftText.textContent = remainingGuess;
+                wrongLetterText.textContent = wrongLetter;
     }
 
-    // Determines if all the letters have been found and tallies wins
-    // if (show[w] === ) {
-
-    // if ((userGuess === "r" && computerGuess === "s") ||
-    // (userGuess === "s" && computerGuess === "p") || 
-    // (userGuess === "p" && computerGuess === "r")) {
-    // wins++;
-    // } else if (userGuess === computerGuess) {
-    // ties++;
-    // } else {
-    // losses++;
+    // Counter
+    // var remainingGuess.innerHTML = "You have " + guessesLeft + " guesses left.";
+    // if (guessesLeft < 1) {
+    //   remainingGuess.innerHTML = "Game Over";
+    //   console.log(remainingGuess)
     // }
-    
+    // for (var i = 0; i < show.length; i++) {
+    //   if (counter + space === show.length) {
+    //     remaingGuess.innerHTML = "You Win!";
+    //     winsTotal++
+    //     consol.log(winsTotal)
+    //   }
+    // }
 
-    winsTotalText.textContent = winsTotal
-    underscoreText.textContent = underscore;
-    guessesLeftText.textContent = guessesLeft;
-    wrongLetterText.textContent = wrongLetter;
+    underscoreText.textContent = underscore.join(' ');
 
 
     </script>
