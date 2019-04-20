@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Word Guess Game
+  <title>Word Guess Game - TV Show
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
@@ -22,7 +22,7 @@
          </div>
          <hr>
          <p>Incorrect Guesses: <span id="wrong-letter"></span></p>
-        <p>Guesses remaining: <span id="guesses">10</span></p>
+        <p>Guesses Remaining: <span id="guesses">10</span></p>
          <hr> 
            <button id="reset">Play again</button>
          </div>
@@ -61,11 +61,13 @@
     var underscoreText = document.getElementById("word");
     var wrongLetterText = document.getElementById("wrong-letter");
     var guessesLeftText = document.getElementById("guesses");
+    var resetButton = document.getElementById("reset");
 
     console.log(show)
     
     // Creates underscores based on length of word //
     var makeUnderscore = () => {
+        underscore = []
         for (var i=0; i<show.length; i++) {
             underscore.push(" _ ");
         }
@@ -83,7 +85,7 @@
       
     
     // Determines if userGuess is found in word, pushes to rightLetter or wrongLetter array //   
-    
+    console.log(userGuess)
         if(show.indexOf(userGuess) > -1) {
             for (var w = 0; w < show.length; w++) {
                 if (show[w] === userGuess) {
@@ -92,41 +94,46 @@
                     underscore[w] = userGuess;
                     rightLetter.push(userGuess);
                     console.log(show[w])
-
-                }
                     console.log("In word");
                     console.log(show.indexOf(userGuess));
                     console.log(rightLetter);
                     console.log(underscore);
 
-                }} else {
-                    wrongLetter.push(userGuess);
-                    remainingGuess--;
+                }
+
+            }
+        } else {
+            wrongLetter.push(userGuess);
+            remainingGuess--;
                     console.log(wrongLetter);   
                     console.log("Not in word");
         }
+
+        console.log(typeof remainingGuess)
+        guessesLeftText.textContent = remainingGuess;
+        if (remainingGuess < 1) {
+            console.log(typeof remainingGuess)
+                guessesLeftText.innerHTML = "Game Over";
+                console.log("Game Over")
+ 
+        }
+   
+            // Moving all elements to the DOM
                 winsTotalText.textContent = winsTotal
                 underscoreText.textContent = underscore.join(' ');
-                guessesLeftText.textContent = remainingGuess;
                 wrongLetterText.textContent = wrongLetter;
     }
 
-    // Counter
-    // var remainingGuess.innerHTML = "You have " + guessesLeft + " guesses left.";
-    // if (guessesLeft < 1) {
-    //   remainingGuess.innerHTML = "Game Over";
-    //   console.log(remainingGuess)
-    // }
-    // for (var i = 0; i < show.length; i++) {
-    //   if (counter + space === show.length) {
-    //     remaingGuess.innerHTML = "You Win!";
-    //     winsTotal++
-    //     consol.log(winsTotal)
-    //   }
-    // }
-
+    resetButton.addEventListener("click", function(){
+        show = ""
+        show = tvShows[Math.floor(Math.random() * tvShows.length)];
+        console.log(show)
+        remainingGuess = 10;
+        wrongLetter = [];
+        makeUnderscore();
+        underscoreText.textContent = underscore.join(' ');
+    })
     underscoreText.textContent = underscore.join(' ');
-
 
     </script>
 </body>
