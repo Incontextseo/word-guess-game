@@ -20,6 +20,8 @@
          </div><br/>
          <div id="word">
          </div><br/>
+         <div id="wrong-letter">
+         </div>
          <p>Guesses remaining: <span id="guesses">10</span></p><br/> 
            <button id="reset">Play again</button>
          </div>
@@ -52,7 +54,11 @@
     var wrongLetter = [];
     var underscore = [];
     var guessesLeft = 10;
+    var winsTotal = 0;
     
+    var winsTotalText = document.getElementById("wins");
+    var underscoreText = document.getElementById("word");
+    var wrongLetterText = document.getElementById("wrong-letter");
     var guessesLeftText = document.getElementById("guesses");
 
     console.log(show)
@@ -85,23 +91,39 @@
             for (var w = 0; w < show.length; w++) {
                 if (show[w] === userGuess) {
     
-    // Replaces underscores with correct user guesses //
+    // Replaces first underscores with correct user guesses //
                     underscore[show.indexOf(userGuess)] = userGuess;
                     rightLetter.push(userGuess);
                     console.log(show[w])
-                }}
+                }
                     console.log("In word")
                     console.log(show.indexOf(userGuess))
                     console.log(underscore);
-            }
-            else{
-            wrongLetter.push(userGuess);
-                    console.log("Not in word")
+                }} else {
+                    wrongLetter.push(userGuess);
+                        console.log("Not in word")
         }
-    
-    };
+    }
 
+    // Determines if all the letters have been found and tallies wins
+    // if (show[w] === ) {
+
+    // if ((userGuess === "r" && computerGuess === "s") ||
+    // (userGuess === "s" && computerGuess === "p") || 
+    // (userGuess === "p" && computerGuess === "r")) {
+    // wins++;
+    // } else if (userGuess === computerGuess) {
+    // ties++;
+    // } else {
+    // losses++;
+    // }
+    
+
+    winsTotalText.textContent = winsTotal
+    underscoreText.textContent = underscore;
     guessesLeftText.textContent = guessesLeft;
+    wrongLetterText.textContent = wrongLetter;
+
 
     </script>
 </body>
