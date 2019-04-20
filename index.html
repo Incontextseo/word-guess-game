@@ -13,25 +13,97 @@
 <body>
     <div class="wrapper">
         <h1>Word Guess Game</h1>
-         <h2>Vanilla JavaScript Hangman Game</h2>
-         <p>Use the alphabet below to guess the word, or click hint to get a clue. </p>
-     </div>
+         <p>Press any key to get started!</p>
+     </div><br/>
      <div class="wrapper">
-         <div id="buttons">
-         </div>  
-         <p id="catagoryName"></p>
-         <div id="hold">
-         </div>
-         <p id="mylives"></p>
-         <p id="clue">Clue -</p>  
-          <canvas id="stickman">This Text will show if the Browser does NOT support HTML5 Canvas tag</canvas>
-         <div class="container">
-           <button id="hint">Hint</button>
+         <div>Wins: <span id="wins">0</span>
+         </div><br/>
+         <div id="word">
+         </div><br/>
+         <p>Guesses remaining: <span id="guesses">10</span></p><br/> 
            <button id="reset">Play again</button>
          </div>
      </div>
-     <footer>Source: https://codepen.io/cathydutton/pen/ldazc</footer>
-<script src="game.js" crossorigin="anonymous"></script>
+<!-- <script src="game.js" crossorigin="anonymous"></script> -->
+<script>
+
+    // Creates an array of possible words for word-guess-game //
+    
+    var tvShows = [
+        "friends",
+        "cheers",
+        "frasier",
+        "ellen",
+        "seinfeld",
+        "blossom",
+        "sabrina",
+        "simpsons",
+        "rugrats",
+        "er",
+        "roseanne",
+        "arthur",
+    ]
+    
+    
+    // Randomly selects string from var tvShows //
+    
+    var show = tvShows[Math.floor(Math.random() * tvShows.length)];
+    var rightLetter = [];
+    var wrongLetter = [];
+    var underscore = [];
+    var guessesLeft = 10;
+    
+    var guessesLeftText = document.getElementById("guesses");
+
+    console.log(show)
+    
+    // Creates underscores based on length of word //
+    var makeUnderscore = () => {
+        for (var i=0; i<show.length; i++) {
+            underscore.push(" _ ");
+        }
+        return underscore;
+        }
+    
+    console.log(makeUnderscore());
+    
+    
+    // Record keys user presses //
+    
+    document.onkeyup = function() {
+        var userGuess = String.fromCharCode(event.keyCode).
+        toLowerCase();
+    
+    // Tells the user how many guesses they have remaining out of 10 //
+        
+        guessesLeft--
+        console.log(guessesLeft);
+    
+    // Determines if userGuess is found in word, pushes to rightLetter or wrongLetter array //   
+    
+        if(show.indexOf(userGuess) > -1) {
+            for (var w = 0; w < show.length; w++) {
+                if (show[w] === userGuess) {
+    
+    // Replaces underscores with correct user guesses //
+                    underscore[show.indexOf(userGuess)] = userGuess;
+                    rightLetter.push(userGuess);
+                    console.log(show[w])
+                }}
+                    console.log("In word")
+                    console.log(show.indexOf(userGuess))
+                    console.log(underscore);
+            }
+            else{
+            wrongLetter.push(userGuess);
+                    console.log("Not in word")
+        }
+    
+    };
+
+    guessesLeftText.textContent = guessesLeft;
+
+    </script>
 </body>
 
 </html>
