@@ -15,7 +15,7 @@
         <div class="container">
                 <div class="row">
                   <div class="col-9"><h1>Word Guess Game</h1>
-                    <p id="directions-text">Press any key to get started!</p>
+                    <p id="directions-text">Press any key to get started! An "*" denotes a space.</p>
                     </div>
                   <div class="col-6">
                       <h2>Guess this popular 90's TV Show:</h2>
@@ -49,6 +49,8 @@
         "er",
         "roseanne",
         "arthur",
+        "fresh prince",
+        "family matters",
     ]
     
     
@@ -76,9 +78,13 @@
     // Creates underscores based on length of word //
     var makeUnderscore = () => {
         underscore = []
-        for (var i=0; i<show.length; i++) {
-            underscore.push(" _ ");
-        }
+            for (var i=0; i<show.length; i++) {
+                if (show[i] === " ") {
+                underscore.push("*");
+                } else {
+                underscore.push("_");
+                }
+            }
         return underscore;
         }
     
