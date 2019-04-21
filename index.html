@@ -7,28 +7,31 @@
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>Word Guess Game</h1>
-         <p>Press any key to get started!</p>
-     </div><br/>
-     <div class="wrapper">
-         <div>Wins: <span id="wins">0</span>
-            <p id="winner"></p>
-         </div><br/>
-         <div id="word">
-         </div>
-         <hr>
-         <p>Incorrect Guesses: <span id="wrong-letter"></span></p>
-        <p>Guesses Remaining: <span id="guesses">10</span></p>
-         <hr> 
-           <button id="reset">Play again</button>
-         </div>
-     </div>
-<!-- <script src="game.js" crossorigin="anonymous"></script> -->
+        <div class="container">
+                <div class="row">
+                  <div class="col-9"><h1>Word Guess Game</h1>
+                    <p id="directions-text">Press any key to get started!</p>
+                    </div>
+                  <div class="col-6">
+                      <h2>Guess this popular 90's TV Show:</h2>
+                        <h2 id="word">
+                        </h2><br/>   
+                    <button id="reset">Play again</button></div>
+
+                  <div class="col-4"><h1 id="winner"></h1><div>Wins: <span id="wins">0</span>
+
+                    <hr>
+                    <p>Incorrect Guesses: <span id="wrong-letter"></span></p>
+                    <p>Guesses Remaining: <span id="guesses">10</span></p>
+                </div>
+                </div>
+              </div>
+<!-- <script src="assets/javascript/game.js"></script> -->
 <script>
 
     // Creates an array of possible words for word-guess-game //
@@ -66,6 +69,7 @@
     var guessesLeftText = document.getElementById("guesses");
     var resetButton = document.getElementById("reset");
     var winnerText = document.getElementById("winner");
+    var directionsText = document.getElementById("directions-text")
 
     console.log(show)
     
@@ -86,7 +90,7 @@
     document.onkeyup = function() {
         var userGuess = String.fromCharCode(event.keyCode).
         toLowerCase();
-      
+    
     
     // Determines if userGuess is found in word, pushes to rightLetter or wrongLetter array //   
     console.log(userGuess)
@@ -134,26 +138,29 @@
 
         }
         // Moving all elements to the DOM
-        winsTotalText.textContent = winsTotal
+        winsTotalText.textContent = winsTotal;
         underscoreText.textContent = underscore.join(' ');
         wrongLetterText.textContent = wrongLetter;
 
     }
-
-
 
     resetButton.addEventListener("click", function(){
         show = ""
         show = tvShows[Math.floor(Math.random() * tvShows.length)];
         console.log(show)
         guessesLeftText.textContent = 10;
-        winnerText.innerHTML = ''
+        usedLetter = []
         wrongLetter = []
+        winnerText.innerHTML = '';
+        wrongLetterText.innerHTML = [];
         makeUnderscore();
         underscoreText.textContent = underscore.join(' ');
-        wrongLetterText.textContext = wrongLetter
     })
 
+    // // Hide the directions
+    // directionsText.textContent = "";
+
+    // Populate TV Show to guess   
     underscoreText.textContent = underscore.join(' ');
 
     </script>
