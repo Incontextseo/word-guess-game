@@ -29,7 +29,6 @@
     var winnerText = "";
     var usedLetter = [];
     var timer;
-    var keyup = true;
     
     var winsTotalText = document.getElementById("wins");
     var underscoreText = document.getElementById("word");
@@ -58,7 +57,6 @@
     console.log(makeUnderscore());
     
     function restartGame () {
-        keyup = true;
         clearInterval(timer);
         show = ""
         show = tvShows[Math.floor(Math.random() * tvShows.length)];
@@ -73,7 +71,6 @@
         underscoreText.textContent = underscore.join(' ');
     }
 
-if (keyup === true) {
     // Record keys user presses //
     
     document.onkeyup = function() {
@@ -123,8 +120,6 @@ if (keyup === true) {
         console.log("underscoreText=" + underscore.join(''))
         if (underscore.join('') === show) {
             winnerText.innerHTML = "You Won!";
-            winsTotal++;
-            keyup = false;
                 console.log(winsTotal)
                 console.log("underscoreText=" + underscore.join(''))
 
@@ -137,9 +132,11 @@ if (keyup === true) {
     }
 
     resetButton.addEventListener("click", function(){
+        winsTotal++;
+        winsTotalText.textContent = winsTotal;
         restartGame ();
     })
-}
+
 
     // // Hide the directions
     // directionsText.textContent = "";
