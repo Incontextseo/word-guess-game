@@ -7,167 +7,187 @@
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
+        <header class="site-header">
+            <div class="innerwrap">
+                <div class="logo">JC Cheney</div>
+                    <nav class="nav-link"><span><a href="https://incontextseo.github.io/responsive-portfolio/index.html">About</a></span>
+                    <span>&#124;</span>
+                    <span><a href="https://incontextseo.github.io/responsive-portfolio/portfolio.html">Portfolio</a></span>
+                    <span>&#124;</span>
+                    <span><a href="https://incontextseo.github.io/responsive-portfolio/contact.html">Contact</a></span>
+                    </nav>
+                </div>
+            </div>
+        </header>
         <div class="container">
+            <section class="main-content">
                 <div class="row">
-                  <div class="col-9"><h1>Word Guess Game</h1>
+                  <div class="col-12"><h1>Word Guess Game</h1>
                     <p id="directions-text">Press any key to get started! An "*" denotes a space.</p>
                     </div>
-                  <div class="col-6">
+                </div>
+                <div class="row">
+                    <div class="col-6">
                       <h2>Guess this popular 90's TV Show:</h2>
                         <h2 id="word">
                         </h2><br/>   
                     <button id="reset">Play again</button></div>
 
-                  <div class="col-4"><h1 id="winner"></h1><div>Wins: <span id="wins">0</span>
+                    <div class="col-6"><h1 id="winner"></h1><div>Wins: <span id="wins">0</span>
 
                     <hr>
                     <p>Incorrect Guesses: <span id="wrong-letter"></span></p>
                     <p>Guesses Remaining: <span id="guesses">10</span></p>
+                    </div>
+                    </div>
                 </div>
-                </div>
-              </div>
-<!-- <script src="assets/javascript/game.js"></script> -->
+            </section>
+        </div>
+        <footer class="site-footer">
+                Copyright©
+        </footer>
+<script src="assets/javascript/game.js"></script>
 <script>
 
-    // Creates an array of possible words for word-guess-game //
+    // // Creates an array of possible words for word-guess-game //
     
-    var tvShows = [
-        "friends",
-        "cheers",
-        "frasier",
-        "ellen",
-        "seinfeld",
-        "blossom",
-        "sabrina",
-        "simpsons",
-        "rugrats",
-        "er",
-        "roseanne",
-        "arthur",
-        "fresh prince",
-        "family matters",
-    ]
+    // var tvShows = [
+    //     "friends",
+    //     "cheers",
+    //     "frasier",
+    //     "ellen",
+    //     "seinfeld",
+    //     "blossom",
+    //     "sabrina",
+    //     "simpsons",
+    //     "rugrats",
+    //     "er",
+    //     "roseanne",
+    //     "arthur",
+    //     "fresh prince",
+    //     "family matters",
+    // ]
     
     
-    // Randomly selects string from var tvShows //
+    // // Randomly selects string from var tvShows //
     
-    var show = tvShows[Math.floor(Math.random() * tvShows.length)];
-    var rightLetter = [];
-    var wrongLetter = [];
-    var underscore = [];
-    var remainingGuess = 10;
-    var winsTotal = 0;
-    var winnerText = "";
-    var usedLetter = [];
+    // var show = tvShows[Math.floor(Math.random() * tvShows.length)];
+    // var rightLetter = [];
+    // var wrongLetter = [];
+    // var underscore = [];
+    // var remainingGuess = 10;
+    // var winsTotal = 0;
+    // var winnerText = "";
+    // var usedLetter = [];
     
-    var winsTotalText = document.getElementById("wins");
-    var underscoreText = document.getElementById("word");
-    var wrongLetterText = document.getElementById("wrong-letter");
-    var guessesLeftText = document.getElementById("guesses");
-    var resetButton = document.getElementById("reset");
-    var winnerText = document.getElementById("winner");
-    var directionsText = document.getElementById("directions-text")
+    // var winsTotalText = document.getElementById("wins");
+    // var underscoreText = document.getElementById("word");
+    // var wrongLetterText = document.getElementById("wrong-letter");
+    // var guessesLeftText = document.getElementById("guesses");
+    // var resetButton = document.getElementById("reset");
+    // var winnerText = document.getElementById("winner");
+    // var directionsText = document.getElementById("directions-text")
 
-    console.log(show)
+    // console.log(show)
     
-    // Creates underscores based on length of word //
-    var makeUnderscore = () => {
-        underscore = []
-            for (var i=0; i<show.length; i++) {
-                if (show[i] === " ") {
-                underscore.push("*");
-                } else {
-                underscore.push("_");
-                }
-            }
-        return underscore;
-        }
+    // // Creates underscores based on length of word //
+    // var makeUnderscore = () => {
+    //     underscore = []
+    //         for (var i=0; i<show.length; i++) {
+    //             if (show[i] === " ") {
+    //             underscore.push("*");
+    //             } else {
+    //             underscore.push("_");
+    //             }
+    //         }
+    //     return underscore;
+    //     }
     
-    console.log(makeUnderscore());
-    
-    
-    // Record keys user presses //
-    
-    document.onkeyup = function() {
-        var userGuess = String.fromCharCode(event.keyCode).
-        toLowerCase();
+    // console.log(makeUnderscore());
     
     
-    // Determines if userGuess is found in word, pushes to rightLetter or wrongLetter array //   
-    console.log(userGuess)
-        if(show.indexOf(userGuess) > -1) {
-            for (var w = 0; w < show.length; w++) {
-                if (show[w] === userGuess) {
+    // // Record keys user presses //
     
-    // Replaces underscores with correct user guesses //
-                    underscore[w] = userGuess;
-                    rightLetter.push(userGuess);
-                    console.log(show[w])
-                    console.log("In word");
-                    console.log(show.indexOf(userGuess));
-                    console.log(rightLetter);
-                    console.log(underscore);
+    // document.onkeyup = function() {
+    //     var userGuess = String.fromCharCode(event.keyCode).
+    //     toLowerCase();
+    
+    
+    // // Determines if userGuess is found in word, pushes to rightLetter or wrongLetter array //   
+    // console.log(userGuess)
+    //     if(show.indexOf(userGuess) > -1) {
+    //         for (var w = 0; w < show.length; w++) {
+    //             if (show[w] === userGuess) {
+    
+    // // Replaces underscores with correct user guesses //
+    //                 underscore[w] = userGuess;
+    //                 rightLetter.push(userGuess);
+    //                 console.log(show[w])
+    //                 console.log("In word");
+    //                 console.log(show.indexOf(userGuess));
+    //                 console.log(rightLetter);
+    //                 console.log(underscore);
 
-                }
+    //             }
 
-            }
-        } else if (wrongLetter.includes(userGuess)) {
-            usedLetter.push(userGuess);
-            console.log(usedLetter);
-        } else {
-            wrongLetter.push(userGuess);
-            remainingGuess--;
-                    console.log(wrongLetter);   
-                    console.log("Not in word");
-        }
+    //         }
+    //     } else if (wrongLetter.includes(userGuess)) {
+    //         usedLetter.push(userGuess);
+    //         console.log(usedLetter);
+    //     } else {
+    //         wrongLetter.push(userGuess);
+    //         remainingGuess--;
+    //                 console.log(wrongLetter);   
+    //                 console.log("Not in word");
+    //     }
 
-        console.log(typeof remainingGuess)
-        guessesLeftText.textContent = remainingGuess;
-        if (remainingGuess < 1) {
-            console.log(typeof remainingGuess)
-                guessesLeftText.innerHTML = "Game Over";
-                console.log("Game Over")
+    //     console.log(typeof remainingGuess)
+    //     guessesLeftText.textContent = remainingGuess;
+    //     if (remainingGuess < 1) {
+    //         console.log(typeof remainingGuess)
+    //             guessesLeftText.innerHTML = "Game Over";
+    //             console.log("Game Over")
  
-        }
+    //     }
         
-        console.log("underscoreText=" + underscore.join(''))
-        if (underscore.join('') === show) {
-            winnerText.innerHTML = "You Won!";
-            winsTotal++;
-                console.log(winsTotal)
-                console.log("underscoreText=" + underscore.join(''))
+    //     console.log("underscoreText=" + underscore.join(''))
+    //     if (underscore.join('') === show) {
+    //         winnerText.innerHTML = "You Won!";
+    //         winsTotal++;
+    //             console.log(winsTotal)
+    //             console.log("underscoreText=" + underscore.join(''))
 
-        }
-        // Moving all elements to the DOM
-        winsTotalText.textContent = winsTotal;
-        underscoreText.textContent = underscore.join(' ');
-        wrongLetterText.textContent = wrongLetter;
+    //     }
+    //     // Moving all elements to the DOM
+    //     winsTotalText.textContent = winsTotal;
+    //     underscoreText.textContent = underscore.join(' ');
+    //     wrongLetterText.textContent = wrongLetter;
 
-    }
+    // }
 
-    resetButton.addEventListener("click", function(){
-        show = ""
-        show = tvShows[Math.floor(Math.random() * tvShows.length)];
-        console.log(show)
-        guessesLeftText.textContent = 10;
-        usedLetter = []
-        wrongLetter = []
-        winnerText.innerHTML = '';
-        wrongLetterText.innerHTML = [];
-        makeUnderscore();
-        underscoreText.textContent = underscore.join(' ');
-    })
+    // resetButton.addEventListener("click", function(){
+    //     show = ""
+    //     show = tvShows[Math.floor(Math.random() * tvShows.length)];
+    //     console.log(show)
+    //     guessesLeftText.textContent = 10;
+    //     usedLetter = []
+    //     wrongLetter = []
+    //     winnerText.innerHTML = '';
+    //     wrongLetterText.innerHTML = [];
+    //     makeUnderscore();
+    //     underscoreText.textContent = underscore.join(' ');
+    // })
 
-    // // Hide the directions
-    // directionsText.textContent = "";
+    // // // Hide the directions
+    // // directionsText.textContent = "";
 
-    // Populate TV Show to guess   
-    underscoreText.textContent = underscore.join(' ');
+    // // Populate TV Show to guess   
+    // underscoreText.textContent = underscore.join(' ');
 
     </script>
 </body>
